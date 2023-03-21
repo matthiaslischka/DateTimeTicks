@@ -1,0 +1,27 @@
+﻿@page "/"
+
+<PageTitle>Ticks to DotNet DateTime UTC</PageTitle>
+
+<h1>Ticks to DateTime UTC</h1>
+
+<p>
+	<EditForm Model="_ticks">
+		Ticks: <InputNumber @bind-Value="_ticks"/> <button class="btn btn-primary" onclick="@ToDateTimeUtcString">To DateTime UTC</button>
+	</EditForm>
+</p>
+
+@if (_dateTimeString != null)
+{
+	<p role="status">DateTime UTC: <code>@_dateTimeString</code></p>
+}
+
+@code {
+	private long _ticks = DateTime.UtcNow.Ticks;
+	private string? _dateTimeString;
+
+	private void ToDateTimeUtcString()
+	{
+		_dateTimeString = new DateTime(_ticks).ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'");
+	}
+
+}
